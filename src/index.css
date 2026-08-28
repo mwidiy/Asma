@@ -1,13 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
 
 :root {
-  --primary-color: #6366f1;
-  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --primary-color: #3b82f6;
   --text-primary: #1e293b;
   --text-secondary: #64748b;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 * {
@@ -18,15 +14,20 @@
 
 body {
   font-family: 'Outfit', sans-serif;
-  background: var(--bg-gradient);
   color: var(--text-primary);
-  min-height: 100vh;
+  /* Use dynamic viewport height for mobile browsers */
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; /* Prevent scrolling during gameplay */
+  
+  /* Disable pull-to-refresh on mobile */
+  overscroll-behavior-y: none;
+  touch-action: none; /* Prevent zooming/scrolling on mobile gestures */
 }
 
 #root {
-  min-height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
