@@ -20,12 +20,35 @@ const POWERUPS = [
   { id: 'heart', icon: '❤️', name: 'Kelapa Segar', msg: 'Minuman Yang Mengembalikan Sebagian Nyawa', duration: 0, color: '#f43f5e', img: '/Kelapa.jpg' }, 
 ];
 
+// --- PRELOADER ---
+// Memaksa browser untuk mendownload gambar/video di latar belakang saat menu utama terbuka
+function Preloader() {
+  const assetsToPreload = [
+    '/siluet.jpg',
+    '/Naik_Gunung.jfif',
+    'https://images.unsplash.com/photo-1601004652238-7650f9754f9a?q=80&w=400&auto=format&fit=crop'
+  ];
+
+  return (
+    <div style={{ display: 'none' }}>
+      {assetsToPreload.map(src => <img key={src} src={src} alt="preload" />)}
+      {POWERUPS.map(p => {
+        if (p.img.endsWith('.mp4')) {
+          return <video key={p.id} src={p.img} preload="auto" />;
+        }
+        return <img key={p.id} src={p.img} alt="preload" />;
+      })}
+    </div>
+  );
+}
+
 // --- APP COMPONENT ---
 function App() {
   const [currentView, setCurrentView] = useState('menu'); // 'menu', 'game', 'quiz'
 
   return (
     <div className="app-container">
+      <Preloader />
       {currentView === 'menu' && <MainMenu setView={setCurrentView} />}
       {currentView === 'quiz' && <QuizView setView={setCurrentView} />}
       {currentView === 'game' && <GameView setView={setCurrentView} />}
